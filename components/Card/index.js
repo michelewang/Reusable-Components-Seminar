@@ -1,8 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { StyleSheet, View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import Button from '../Button';
 
-export defualt class Card extends Component {
+export default class Card extends Component {
     static propTypes ={
         text: PropTypes.string.isRequired,
         id: PropTypes.string.isRequired,
@@ -20,9 +21,9 @@ export defualt class Card extends Component {
             <View style={styles.card}>
                 <Text style={styles.textWrap}>{this.props.text}</Text>
                 <View style={styles.wrapButtons}>
-                    <Button onPress={this.props.moveBackward} text='<--'/>
-                    <Button onPress={this.props.moveForward} text='-->'/>
-                    <Button onPress={this.props.delete} text='X' />
+                    <Button onClick={this.props.moveBackward} text='<--'/>
+                    <Button onClick={this.props.moveForward} text='-->'/>
+                    <Button onClick={this.props.delete} text='X' />
                 </View>
             </View>
         )
@@ -30,24 +31,24 @@ export defualt class Card extends Component {
 
 }
 
-
-const styles = 
+const styles =
     StyleSheet.create({
         card: {
-            backgroundColor: "#b7273e",
-            borderColor: "#658d80",
+            backgroundColor: "#fffafa",
+            borderColor: "#898989",
             borderRadius: 10,
-            padding: 20,
-            display: flex,
-            flexDirection: row
+            padding: 50,
+            display: 'flex',
+            flexDirection: 'row',
+            margin: 10
         },
         textWrap: {
             flex: 3,
-        }
+        },
         wrapButtons: {
             flexDirection: 'column',
-            justifyContent: 'center'
+            justifyContent: 'center',
             alignItems: 'center',
-            flex: 1,
+            flex: 1
         }
-    })
+    });
