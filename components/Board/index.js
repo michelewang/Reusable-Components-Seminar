@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { StyleSheet, View, TouchableOpacity, Text } from 'react-native'
 import PropTypes from 'prop-types'
 
+import List from '../List'
+
 export default class Board extends Component {
 
     static propTypes = {
@@ -71,15 +73,17 @@ export default class Board extends Component {
     }
 
     addFunctions = () => {
-        this.setState({
-            lists: this.state.lists.map(l => {
-                l.cards.map(card => {
-                    card.moveForward = this.moveForward.bind(null, card.id);
-                    card.moveBackward = this.moveBackward.bind(null, card.id);
-                    card.delete = this.deleteCard.bind(null, card.id);
-                });
-            })
-        });
+      this.setState({
+        lists: this.state.lists.map(list => ({
+          ...list,
+          cards: list.cards.map(card => ({
+            ...card,
+            moveForward: this.moveForward.bind(null, card.id),
+            moveBackward: this.moveBackward.bind(null, card.id),
+            delete: this.deleteCard.bind(null, card.id),
+          }))
+        }))
+      })
     }
 
     componentWillMount = () => {
@@ -91,7 +95,7 @@ export default class Board extends Component {
             <View>
                 <Text>{this.props.name}</Text>
                 <View style={styles.boardWrap}>
-                    {this.state.lists.map((l, i) => <List {...l} key={l.title}/>)}
+                    {this.state.lists.map((l, i) => <List {...l} key={l.title} />)}
                 </View>
             </View>
         );

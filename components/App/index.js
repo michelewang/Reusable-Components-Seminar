@@ -32,7 +32,7 @@ export default class App extends Component {
                            value={this.state.boardInput} />
                 <Button onClick={this.createBoard} text="Create Board" />
 
-                <View>{this.state.boards.map(b, i) => <Board key={i} {...b} />}</View>
+                <View>{this.state.boards.map((b, i) => <Board key={i} {...b} />)}</View>
             </View>
         )
     }
