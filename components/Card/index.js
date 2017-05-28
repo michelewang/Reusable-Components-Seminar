@@ -19,7 +19,9 @@ export default class Card extends Component {
   render() {
     return (
       <View style={styles.card}>
-        <Text style={styles.textWrap}>{this.props.text}</Text>
+        <View style={styles.textWrap}>
+          <Text>{this.props.text}</Text>
+        </View>
         <View style={styles.wrapButtons}>
           <Button onClick={this.props.moveBackward} text="<--" />
           <Button onClick={this.props.moveForward} text="-->" />
@@ -33,15 +35,15 @@ export default class Card extends Component {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: '#fffafa',
-    borderColor: '#898989',
-    borderRadius: 10,
-    padding: 50,
+    borderRadius: 5,
+    padding: 15,
     display: 'flex',
     flexDirection: 'row',
     margin: 10,
   },
   textWrap: {
     flex: 3,
+    justifyContent: 'center',
   },
   wrapButtons: {
     flexDirection: 'column',

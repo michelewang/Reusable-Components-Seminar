@@ -85,9 +85,9 @@ export default class Board extends Component {
 
   render() {
     return (
-      <View>
-        <Text>{this.props.name}</Text>
-        <View style={styles.boardWrap}>
+      <View style={styles.wrap}>
+        <Text style={styles.title}>{this.props.name}</Text>
+        <View>
           {this.state.lists.map((l, i) => <List {...l} key={l.title} />)}
         </View>
       </View>
@@ -96,7 +96,16 @@ export default class Board extends Component {
 }
 
 const styles = StyleSheet.create({
-  boardWrap: {
+  wrap: {
     backgroundColor: '#fff',
+    marginTop: 15,
+    paddingTop: 10,
+    borderTopWidth: 1,
+    borderTopColor: '#000',
+  },
+  title: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 24,
   },
 });

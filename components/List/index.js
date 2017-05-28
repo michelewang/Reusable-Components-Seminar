@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import Card from '../Card';
 
 export default (List = props => (
-  <View style={styles.list}>
-    <Text>{props.title}</Text>
+  <View style={styles.wrap}>
+    <Text style={styles.title}>{props.title}</Text>
     {props.cards.map(card => <Card key={card.id} {...card} />)}
   </View>
 ));
@@ -16,15 +16,18 @@ List.propTypes = {
 };
 
 const styles = StyleSheet.create({
-  list: {
-    backgroundColor: '#9b0200',
+  wrap: {
+    backgroundColor: '#ffa700',
     flexDirection: 'column',
-    padding: 30,
+    padding: 10,
     justifyContent: 'space-between',
     marginBottom: 10,
-    borderWidth: 2,
-    borderColor: '#ffa700',
     borderRadius: 5,
     margin: 10,
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    paddingLeft: 10,
   },
 });

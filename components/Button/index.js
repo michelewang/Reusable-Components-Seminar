@@ -35,17 +35,17 @@ const styles = StyleSheet.create({
   button: {
     padding: 5,
     borderRadius: 5,
-    backgroundColor: '#1da3f1',
     alignItems: 'center',
     justifyContent: 'center',
     margin: 3,
   },
   text: {
     fontSize: 10,
-    color: '#9b0200',
+    fontWeight: 'bold',
+    color: '#fff',
   },
   default: {
-    backgroundColor: '#898989',
+    backgroundColor: '#08f',
   },
   forward: {
     backgroundColor: '#34ff1a',
