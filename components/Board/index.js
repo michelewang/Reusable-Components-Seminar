@@ -28,35 +28,27 @@ export default class Board extends Component {
   move = (id, dir) => {
     let index;
     let card;
-    let newLists = this.state.lists.map((l, i) => {
-      return {
-        ...l,
-        cards: l.cards.filter(e => {
-          if (e.id === id) {
-            index = i;
-            card = e;
-            return false;
-          }
-          return true;
-        }),
-      };
-    });
+    let newLists = this.state.lists.map((l, i) => ({
+      ...l,
+      cards: l.cards.filter(e => {
+        if (e.id === id) {
+          index = i;
+          card = e;
+          return false;
+        }
+        return true;
+      }),
+    }));
 
-    if (!index) throw new Error('you suck: no card with that id');
+    if (index == null) throw new Error('you suck: no card with that id');
     if (index + dir < 0 || index + dir >= this.state.lists.length) {
       throw new Error('you illegal with your move');
     }
 
     this.setState({
-      lists: newLists.map((l, i) => {
-        if (i === index + dir) {
-          return {
-            ...l,
-            cards: [card, ...l.cards],
-          };
-        }
-        return l;
-      }),
+      lists: newLists.map(
+        (l, i) => (i === index + dir ? { ...l, cards: [card, ...l.cards] } : l)
+      ),
     });
   };
 
