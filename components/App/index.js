@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TextInput } from 'react-native';
+import { ScrollView, StyleSheet, View, TextInput } from 'react-native';
 import PropTypes from 'prop-types';
+import { Constants } from 'expo'
 
 import Board from '../Board';
 import Button from '../Button';
@@ -18,13 +19,13 @@ export default class App extends Component {
     };
   }
 
-  createBoard() {
+  createBoard = () => {
     this.setState(s => ({ boards: [...s.boards, { name: s.boardInput }] }));
   }
 
   render() {
     return (
-      <View style={styles.view}>
+      <ScrollView style={styles.view}>
         <TextInput
           style={styles.inputs}
           onChangeText={boardInput => {
@@ -35,7 +36,7 @@ export default class App extends Component {
         <Button onClick={this.createBoard} text="Create Board" />
 
         <View>{this.state.boards.map((b, i) => <Board key={i} {...b} />)}</View>
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -48,5 +49,7 @@ const styles = StyleSheet.create({
   },
   view: {
     flex: 1,
+    backgroundColor: '#fff',
+    paddingTop: Constants.statusBarHeight,
   },
 });

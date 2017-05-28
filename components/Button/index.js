@@ -10,12 +10,13 @@ export default class Button extends Component {
       'forward',
       'backward',
       'delete',
-      'close',
+      'create',
       'default',
     ]).isRequired,
   };
 
   static defaultProps = {
+    style: 'default',
     text: 'Click Me!',
   };
   render() {
