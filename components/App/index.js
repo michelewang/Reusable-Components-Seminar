@@ -2,25 +2,37 @@ import React, { Component } from 'react';
 import { ScrollView, StyleSheet, View, TextInput } from 'react-native';
 import PropTypes from 'prop-types';
 import { Constants } from 'expo'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 
 import Board from '../Board';
 import Button from '../Button';
+import {addBoard} from '../../redux/actions'
 
 const BOARDS = [{ name: 'Bootcamp' }];
 const USERS = { name: 'Admin' };
 
-export default class App extends Component {
+const mapStateToProps = state => ({boards: state.boards, user: state.user})
+const mapDispatchToProps = dispatch => ({
+  addBoard: bindActionCreators(addBoard, dispatch),
+})
+
+class App extends Component {
+  static propTypes ={
+    boards: PropTypes.array.isRequired,
+    user: PropTypes.object.isRequired,
+    addBoard: PropTypes.func.isRequired,
+  }
+
   constructor(props) {
     super(props);
     this.state = {
-      boards: BOARDS,
-      users: USERS,
       boardInput: '',
     };
   }
 
   createBoard = () => {
-    this.setState(s => ({ boards: [...s.boards, { name: s.boardInput }] }));
+    this.props.addBoard(this.state.boardInput)
   }
 
   render() {
@@ -35,7 +47,7 @@ export default class App extends Component {
         />
         <Button onClick={this.createBoard} text="Create Board" />
 
-        <View>{this.state.boards.map((b, i) => <Board key={i} {...b} />)}</View>
+        <View>{this.props.boards.map((b, i) => <Board key={i} {...b} />)}</View>
       </ScrollView>
     );
   }
@@ -53,3 +65,5 @@ const styles = StyleSheet.create({
     marginTop: Constants.statusBarHeight,
   },
 });
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

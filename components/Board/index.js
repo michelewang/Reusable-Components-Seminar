@@ -86,7 +86,7 @@ export default class Board extends Component {
   render() {
     return (
       <View style={styles.wrap}>
-        <Text style={styles.title}>{this.props.name}</Text>
+        <Text style={styles.title}>{this.props.title}</Text>
         <View>
           {this.state.lists.map((l, i) => <List {...l} key={l.title} />)}
         </View>
