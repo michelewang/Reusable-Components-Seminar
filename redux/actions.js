@@ -2,7 +2,7 @@ let nextCardId = 0
 
 // declare the action types
 export const ADD_CARD = 'ADD_CARD'
-export const DELETE_CARD ='DELETE_CARD'
+export const DELETE_CARD = 'DELETE_CARD'
 export const MOVE_CARD = 'MOVE_CARD'
 
 export const ADD_LIST = 'ADD_LIST'
@@ -18,5 +18,7 @@ export const addCard = (text, listTitle) => ({
     listTitle,
   },
 })
+
+export const deleteCard = id => ({type: DELETE_CARD, payload: {id}})
 
 export const addBoard = title => ({type: ADD_BOARD, payload: {title}})

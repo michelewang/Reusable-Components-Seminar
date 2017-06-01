@@ -2,19 +2,31 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import Button from '../Button';
+import { deleteCard } from '../../redux/actions'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
-export default class Card extends Component {
+//const mapStateToProps = state => ({boards: state.boards, user: state.user})
+const mapDispatchToProps = dispatch => ({
+  deleteCard: bindActionCreators(deleteCard, dispatch),
+})
+
+class Card extends Component {
   static propTypes = {
     text: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
     moveForward: PropTypes.func.isRequired,
     moveBackward: PropTypes.func.isRequired,
-    delete: PropTypes.func.isRequired,
+    deleteCard: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
     text: 'this is dope like the card team',
   };
+
+  deleteCard = () => {
+    this.props.deleteCard(this.props.id)
+  }
 
   render() {
     return (
@@ -25,7 +37,7 @@ export default class Card extends Component {
         <View style={styles.wrapButtons}>
           <Button onClick={this.props.moveBackward} text="<--" />
           <Button onClick={this.props.moveForward} text="-->" />
-          <Button onClick={this.props.delete} text="X" />
+          <Button onClick={this.deleteCard} text="X" />
         </View>
       </View>
     );
@@ -52,3 +64,5 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
+export default connect(null, mapDispatchToProps)(Card)
