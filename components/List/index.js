@@ -1,19 +1,53 @@
-import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, View, Text, TextInput } from 'react-native';
 import PropTypes from 'prop-types';
+import Button from '../Button';
 import Card from '../Card';
+import { addCard } from '../../redux/actions'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
-export default (List = props => (
-  <View style={styles.wrap}>
-    <Text style={styles.title}>{props.title}</Text>
-    {props.cards.map(card => <Card key={card.id} {...card} />)}
-  </View>
-));
+const mapStateToProps = state => ({boards: state.boards, user: state.user})
+const mapDispatchToProps = dispatch => ({
+  addCard: bindActionCreators(addCard, dispatch),
+})
 
-List.propTypes = {
-  title: PropTypes.string.isRequired,
-  cards: PropTypes.array.isRequired,
-};
+class List extends Component {
+    static propTypes = {
+      title: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+      cards: PropTypes.array.isRequired,
+      addCard: PropTypes.func.isRequired,
+    };
+
+    constructor(props) {
+      super(props);
+      this.state = {
+        cardInput: '',
+      };
+    }
+
+    addCard = () => {
+      this.props.addCard(this.state.cardInput, this.props.id)
+    }
+
+    render() {
+        return (
+            <View style={styles.wrap}>
+                <Text style={styles.title}>{this.props.title}</Text>
+                {this.props.cards.map(card => <Card key={card.id} {...card} />)}
+                <TextInput
+                  style={styles.inputs}
+                  onChangeText={cardInput => {
+                    this.setState({ cardInput });
+                  }}
+                  value={this.state.cardInput}
+                />
+                <Button onClick={this.addCard} text="+ Create Card" />
+            </View>
+        )
+    }
+}
 
 const styles = StyleSheet.create({
   wrap: {
@@ -30,4 +64,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingLeft: 10,
   },
+  inputs: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+  },
 });
+
+export default connect(mapStateToProps, mapDispatchToProps)(List)

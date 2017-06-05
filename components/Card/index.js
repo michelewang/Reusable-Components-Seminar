@@ -2,21 +2,20 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import Button from '../Button';
-import { deleteCard } from '../../redux/actions'
+import { deleteCard, moveCard } from '../../redux/actions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-//const mapStateToProps = state => ({boards: state.boards, user: state.user})
 const mapDispatchToProps = dispatch => ({
   deleteCard: bindActionCreators(deleteCard, dispatch),
+  moveCard: bindActionCreators(moveCard, dispatch),
 })
 
 class Card extends Component {
   static propTypes = {
     text: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-    moveForward: PropTypes.func.isRequired,
-    moveBackward: PropTypes.func.isRequired,
+    id: PropTypes.number.isRequired,
+    moveCard: PropTypes.func.isRequired,
     deleteCard: PropTypes.func.isRequired,
   };
 
@@ -28,6 +27,14 @@ class Card extends Component {
     this.props.deleteCard(this.props.id)
   }
 
+  moveForward = () => {
+    this.props.moveCard(this.props.id, 1)
+  }
+
+  moveBackward = () => {
+    this.props.moveCard(this.props.id, -1)
+  }
+
   render() {
     return (
       <View style={styles.card}>
@@ -35,8 +42,8 @@ class Card extends Component {
           <Text>{this.props.text}</Text>
         </View>
         <View style={styles.wrapButtons}>
-          <Button onClick={this.props.moveBackward} text="<--" />
-          <Button onClick={this.props.moveForward} text="-->" />
+          <Button onClick={this.moveBackward} text="<--" />
+          <Button onClick={this.moveForward} text="-->" />
           <Button onClick={this.deleteCard} text="X" />
         </View>
       </View>

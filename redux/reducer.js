@@ -14,28 +14,84 @@ export default (state = initialState, action) => {
         lists: [
           {
             title: 'list1',
-            cards: [{ text: 'text1', id: '1' }, { text: 'text2', id: '2' }],
+            id: 0,
+            cards: [],
           },
           {
             title: 'list2',
-            cards: [{ text: 'text3', id: '3' }, { text: 'text4', id: '4' }],
+            id: 1,
+            cards: [],
           },
         ],
       }
-      console.log('adding board')
       return Object.assign({}, state, {
         boards: [...state.boards, newBoard]
       })
     }
 
-    case DELETE_CARD: {
-        console.log(state)
-        const newBoards = state.boards.map(board => {
-            board.lists.map(list => {
-                list.cards.filter(c => c.id !== action.payload.id)
-            })
+    case ADD_CARD: {
+        const newCard = {
+            id: action.payload.id,
+            text: action.payload.text,
+        }
+
+        let newBoards = state.boards.map(b => ({
+            ...b,
+            lists: b.lists.map(l => ({
+                ...l,
+                cards: l.id === action.payload.listId ? {...l, cards: [newCard, ...l.cards]} : l
+            }))
+        }))
+
+        return Object.assign({}, state, {
+            boards: [...newBoards]
         })
-        console.log(newBoards)
+    }
+
+    case DELETE_CARD: {
+        const newBoards = state.boards.map(board => {
+            return {
+                ...board,
+                lists: (board.lists.map(list => {
+                    return {
+                        ...list,
+                        cards: list.cards.filter(c => c.id !== action.payload.id)
+                    }
+                }))
+            }
+        })
+        return Object.assign({}, state, {
+            boards: [...newBoards]
+        })
+    }
+
+    case MOVE_CARD: {
+        let bindex;
+        let lindex;
+        let card;
+        let newBoards = state.boards.map((b, bi) => ({
+            ...b,
+            lists: b.lists.map((l, li) => ({
+                ...l,
+                cards: l.cards.filter(c => {
+                    if (c.id === action.payload.id) {
+                        bindex = bi;
+                        lindex = li;
+                        card = c;
+                        return false;
+                    }
+                    return true;
+                })
+            }))
+        }))
+
+        if (bindex == null || lindex == null) throw new Error('no card with that id');
+        if (lindex + action.payload.dir < 0 || lindex + action.payload.dir >= state.boards[bindex].lists.length) {
+            return state;
+        }
+
+        newBoards[bindex].lists[lindex + action.payload.dir].cards.push(card);
+
         return Object.assign({}, state, {
             boards: [...newBoards]
         })
