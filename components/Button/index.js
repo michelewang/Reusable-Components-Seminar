@@ -7,8 +7,7 @@ export default class Button extends Component {
     text: PropTypes.string,
     onClick: PropTypes.func.isRequired,
     style: PropTypes.oneOf([
-      "forward",
-      "backward",
+      "arrow",
       "delete",
       "create",
       "default"
@@ -42,21 +41,18 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 10,
     fontWeight: "bold",
-    color: "#fff"
+    color: "#fff",
   },
   default: {
-    backgroundColor: "#08f"
+    backgroundColor: "#FFA726"
   },
-  forward: {
-    backgroundColor: "#34ff1a"
-  },
-  backward: {
-    backgroundColor: "green"
+  arrow: {
+    backgroundColor: "#263238"
   },
   delete: {
-    backgroundColor: "#ff0300"
+    backgroundColor: "#D50000"
   },
   create: {
-    backgroundColor: "#34ff1a"
+    backgroundColor: "#283593"
   }
 })

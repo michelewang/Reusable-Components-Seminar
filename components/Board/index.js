@@ -23,7 +23,7 @@ class Board extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      listInput: ""
+      listInput: "  Enter List Name"
     }
   }
 
@@ -38,19 +38,21 @@ class Board extends Component {
   render() {
     return (
       <View style={styles.wrap}>
-        <Text style={styles.title}>{this.props.name}</Text>
-        <Button onClick={this.deleteBoard} text="&#10005;" />
+        <View style={styles.topRow}>
+          <Text style={styles.title}>{this.props.name}</Text>
+          <Button onClick={this.deleteBoard} text="&#10005;" style="delete"/>
+        </View>
         <View>
           {this.props.lists.map((l, i) => <List {...l} key={l.id} />)}
         </View>
         <TextInput
           style={styles.inputs}
+          clearTextOnFocus={true}
           onChangeText={listInput => {
             this.setState({ listInput })
           }}
-          value={this.state.listInput}
-        />
-        <Button onClick={this.addList} text="+ Create List" />
+          value={this.state.listInput}/>
+        <Button onClick={this.addList} text="+ Create List" style="create" />
       </View>
     )
   }
@@ -58,11 +60,14 @@ class Board extends Component {
 
 const styles = StyleSheet.create({
   wrap: {
-    backgroundColor: "#fff",
-    marginTop: 15,
-    paddingTop: 10,
-    borderTopWidth: 1,
-    borderTopColor: "#000"
+    backgroundColor: "#78909C",
+    margin: 5,
+    padding: 10,
+    borderRadius: 2,
+  },
+  topRow: {
+    flexDirection: "row",
+    display: "flex",
   },
   title: {
     textAlign: "center",
@@ -70,9 +75,11 @@ const styles = StyleSheet.create({
     fontSize: 24
   },
   inputs: {
+    margin: 10,
+    padding: 2,
     height: 40,
-    borderColor: "gray",
-    borderWidth: 1
+    borderWidth: 1,
+    borderRadius: 4
   }
 })
 

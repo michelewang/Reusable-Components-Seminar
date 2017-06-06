@@ -42,9 +42,9 @@ class Card extends Component {
           <Text>{this.props.text}</Text>
         </View>
         <View style={styles.wrapButtons}>
-          <Button onClick={this.moveBackward} text="&#8593;" />
-          <Button onClick={this.moveForward} text="&#8595;" />
-          <Button onClick={this.deleteCard} text="&#10005;" />
+          <Button onClick={this.moveBackward} text="&#8593;" style="arrow" />
+          <Button onClick={this.moveForward} text="&#8595;" style="arrow" />
+          <Button onClick={this.deleteCard} text="&#10005;" style="delete" />
         </View>
       </View>
     )

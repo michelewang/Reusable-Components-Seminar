@@ -24,7 +24,7 @@ class List extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      cardInput: ""
+      cardInput: "  Enter Card Name"
     }
   }
 
@@ -39,19 +39,22 @@ class List extends Component {
   render() {
     return (
       <View style={styles.wrap}>
-        <Text style={styles.title}>{this.props.title}</Text>
-        <Button onClick={this.deleteList} text="&#10005;" />
+        <View style={styles.topRow}>
+          <Text style={styles.title}>{this.props.title}</Text>
+          <Button onClick={this.deleteList} text="&#10005;" style="delete"/>
+        </View>
         <View>
           {this.props.cards.map(card => <Card key={card.id} {...card} />)}
         </View>
         <TextInput
           style={styles.inputs}
+          clearTextOnFocus={true}
           onChangeText={cardInput => {
             this.setState({ cardInput })
           }}
           value={this.state.cardInput}
         />
-        <Button onClick={this.addCard} text="+ Create Card" />
+        <Button onClick={this.addCard} text="+ Create Card" style="create" />
       </View>
     )
   }
@@ -59,23 +62,28 @@ class List extends Component {
 
 const styles = StyleSheet.create({
   wrap: {
-    backgroundColor: "#ffa700",
+    backgroundColor: "#EF5350",
     flexDirection: "column",
-    padding: 10,
+    padding: 5,
     justifyContent: "space-between",
     marginBottom: 10,
     borderRadius: 5,
     margin: 10
   },
+  topRow: {
+    flexDirection: "row",
+    display: "flex",
+  },
   title: {
+    textAlign: "center",
     fontWeight: "bold",
     fontSize: 16,
     paddingLeft: 10
   },
   inputs: {
     height: 40,
-    borderColor: "gray",
-    borderWidth: 1
+    borderWidth: 1,
+    borderRadius: 4
   }
 })
 

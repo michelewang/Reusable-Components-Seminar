@@ -1,9 +1,11 @@
 import React, { Component } from "react"
-import { ScrollView, StyleSheet, View, TextInput, KeyboardAvoidingView } from "react-native"
+import { ScrollView, StyleSheet, View, TextInput, Text} from "react-native"
 import PropTypes from "prop-types"
 import { Constants } from "expo"
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { setCustomText } from 'react-native-global-props';
 
 import Board from "../Board"
 import Button from "../Button"
@@ -11,6 +13,13 @@ import { addBoard } from "../../redux/actions"
 
 const BOARDS = [{ name: "Bootcamp" }]
 const USERS = { name: "Admin" }
+
+const customTextProps = { 
+  style: { 
+    fontFamily: 'Futura'
+  }
+}
+setCustomText(customTextProps);
 
 const mapStateToProps = state => ({ boards: state.boards, user: state.user })
 const mapDispatchToProps = dispatch => ({
@@ -27,7 +36,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      boardInput: ""
+      boardInput: " Enter Board Name"
     }
   }
 
@@ -37,34 +46,41 @@ class App extends Component {
 
   render() {
     return (
-      //<KeyboardAvoidingView behavior="padding">
-      <ScrollView style={styles.view}>
+      <KeyboardAwareScrollView style={styles.view}>
+        <Text style={styles.header}>Welcome to Devello!</Text>
         <TextInput
           style={styles.inputs}
+          clearTextOnFocus={true}
           onChangeText={boardInput => {
             this.setState({ boardInput })
           }}
           value={this.state.boardInput}
         />
-        <Button onClick={this.addBoard} text="Create Board" />
+        <Button onClick={this.addBoard} text=" + Create Board" style="create"/>
 
         <View>{this.props.boards.map((b, i) => <Board key={i} {...b} />)}</View>
-      </ScrollView>
-      //</KeyboardAvoidingView>
+      </KeyboardAwareScrollView>
     )
   }
 }
 
 const styles = StyleSheet.create({
   inputs: {
+    marginTop: 30,
     height: 40,
-    borderColor: "gray",
-    borderWidth: 1
+    borderColor: "white",
+    borderWidth: 1,
   },
   view: {
     flex: 1,
-    backgroundColor: "#fff",
+    height: 10,
+    backgroundColor: "white",
     marginTop: Constants.statusBarHeight
+  },
+  header: {
+    marginTop: 10,
+    fontSize: 30,
+    textAlign: "center"
   }
 })
 
