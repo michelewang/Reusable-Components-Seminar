@@ -1,5 +1,13 @@
 import React, { Component } from "react"
-import { StyleSheet, View, Text, TextInput } from "react-native"
+import { 
+  StyleSheet, 
+  View, 
+  Text, 
+  TextInput, 
+  PanResponder,
+  Animated,
+  Dimensions,
+} from "react-native"
 import PropTypes from "prop-types"
 import Button from "../Button"
 import Card from "../Card"
@@ -24,8 +32,42 @@ class List extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      cardInput: ""
+      cardInput: "",
+      showDraggable: true,
+      pan: new Animated.ValueXY(),
     }
+
+    this.panResponder = PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+        onPanResponderMove: Animated.event([null,{
+            dx: this.state.pan.x,
+            dy: this.state.pan.y
+        }]),
+        onPanResponderRelease: (e, gesture) => {
+          if(this.isDropZone(gesture)) {
+            this.setState({
+              showDraggable: false,
+            });
+          }
+          else {
+            Animated.spring(
+              this.state.pan,
+              {toValue: {x:0, y:0}}
+            ).start();
+          }
+        } 
+      });
+  }
+
+  setDropZoneValues = (event) => {
+    this.setState({
+        dropZoneValues : event.nativeEvent.layout
+    });
+  }
+
+  isDropZone = (gesture) => {
+    var dz = this.state.dropZoneValues;
+    return gesture.moveY > dz.y && gesture.moveY < dz.y + dz.height;
   }
 
   addCard = () => {
@@ -40,10 +82,17 @@ class List extends Component {
     return (
       <View style={styles.wrap}>
         <Text style={styles.title}>{this.props.title}</Text>
-        <Button onClick={this.deleteList} text="&#10005;" />
-        <View>
-          {this.props.cards.map(card => <Card key={card.id} {...card} />)}
+        <View
+          onLayout={this.setDropZoneValues.bind(this)} 
+          style={styles.dropZone}>
+          <Text>Drop me here!</Text>
         </View>
+        <Button onClick={this.deleteList} text="&#10005;" />
+          <Animated.View
+            {...this.panResponder.panHandlers}
+            style={[this.state.pan.getLayout()]}>
+            {this.props.cards.map(card => <Card key={card.id} {...card} />)}
+          </Animated.View>
         <TextInput
           style={styles.inputs}
           onChangeText={cardInput => {
@@ -58,6 +107,9 @@ class List extends Component {
 }
 
 const styles = StyleSheet.create({
+  dropZone: {
+    height: 100,
+  },
   wrap: {
     backgroundColor: "#ffa700",
     flexDirection: "column",
