@@ -1,10 +1,10 @@
-import Expo from 'expo';
-import React from 'react';
-import {Provider} from 'react-redux'
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import Expo from "expo"
+import React from "react"
+import { Provider } from "react-redux"
+import { StyleSheet, Text, View, ScrollView } from "react-native"
 
-import MainApp from './components/App'
-import store from './redux/store'
+import MainApp from "./components/App"
+import store from "./redux/store"
 
 class App extends React.Component {
   render() {
@@ -12,8 +12,8 @@ class App extends React.Component {
       <Provider store={store}>
         <MainApp />
       </Provider>
-    );
+    )
   }
 }
 
-Expo.registerRootComponent(App);
+Expo.registerRootComponent(App)

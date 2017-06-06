@@ -1,7 +1,7 @@
-import {createStore} from 'redux'
+import { createStore } from "redux"
 
-import reducer from './reducer'
-import {addBoard} from './actions'
+import reducer from "./reducer"
+import { addBoard } from "./actions"
 
 const store = createStore(reducer)
 

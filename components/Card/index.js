@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import PropTypes from 'prop-types';
-import Button from '../Button';
-import { deleteCard, moveCard } from '../../redux/actions'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import React, { Component } from "react"
+import { StyleSheet, View, Text } from "react-native"
+import PropTypes from "prop-types"
+import Button from "../Button"
+import { deleteCard, moveCard } from "../../redux/actions"
+import { connect } from "react-redux"
+import { bindActionCreators } from "redux"
 
 const mapDispatchToProps = dispatch => ({
   deleteCard: bindActionCreators(deleteCard, dispatch),
-  moveCard: bindActionCreators(moveCard, dispatch),
+  moveCard: bindActionCreators(moveCard, dispatch)
 })
 
 class Card extends Component {
@@ -16,12 +16,12 @@ class Card extends Component {
     text: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
     moveCard: PropTypes.func.isRequired,
-    deleteCard: PropTypes.func.isRequired,
-  };
+    deleteCard: PropTypes.func.isRequired
+  }
 
   static defaultProps = {
-    text: 'this is dope like the card team',
-  };
+    text: "this is dope like the card team"
+  }
 
   deleteCard = () => {
     this.props.deleteCard(this.props.id)
@@ -47,29 +47,29 @@ class Card extends Component {
           <Button onClick={this.deleteCard} text="X" />
         </View>
       </View>
-    );
+    )
   }
 }
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#fffafa',
+    backgroundColor: "#fffafa",
     borderRadius: 5,
     padding: 15,
-    display: 'flex',
-    flexDirection: 'row',
-    margin: 10,
+    display: "flex",
+    flexDirection: "row",
+    margin: 10
   },
   textWrap: {
     flex: 3,
-    justifyContent: 'center',
+    justifyContent: "center"
   },
   wrapButtons: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-  },
-});
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1
+  }
+})
 
 export default connect(null, mapDispatchToProps)(Card)

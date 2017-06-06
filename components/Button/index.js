@@ -1,24 +1,24 @@
-import React, { Component } from 'react';
-import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
-import PropTypes from 'prop-types';
+import React, { Component } from "react"
+import { StyleSheet, View, TouchableOpacity, Text } from "react-native"
+import PropTypes from "prop-types"
 
 export default class Button extends Component {
   static propTypes = {
     text: PropTypes.string,
     onClick: PropTypes.func.isRequired,
     style: PropTypes.oneOf([
-      'forward',
-      'backward',
-      'delete',
-      'create',
-      'default',
-    ]).isRequired,
-  };
+      "forward",
+      "backward",
+      "delete",
+      "create",
+      "default"
+    ]).isRequired
+  }
 
   static defaultProps = {
-    style: 'default',
-    text: 'Click Me!',
-  };
+    style: "default",
+    text: "Click Me!"
+  }
   render() {
     return (
       <TouchableOpacity
@@ -27,7 +27,7 @@ export default class Button extends Component {
       >
         <Text style={styles.text}>{this.props.text}</Text>
       </TouchableOpacity>
-    );
+    )
   }
 }
 
@@ -35,28 +35,28 @@ const styles = StyleSheet.create({
   button: {
     padding: 5,
     borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 3,
+    alignItems: "center",
+    justifyContent: "center",
+    margin: 3
   },
   text: {
     fontSize: 10,
-    fontWeight: 'bold',
-    color: '#fff',
+    fontWeight: "bold",
+    color: "#fff"
   },
   default: {
-    backgroundColor: '#08f',
+    backgroundColor: "#08f"
   },
   forward: {
-    backgroundColor: '#34ff1a',
+    backgroundColor: "#34ff1a"
   },
   backward: {
-    backgroundColor: 'green',
+    backgroundColor: "green"
   },
   delete: {
-    backgroundColor: '#ff0300',
+    backgroundColor: "#ff0300"
   },
   create: {
-    backgroundColor: '#34ff1a',
-  },
-});
+    backgroundColor: "#34ff1a"
+  }
+})
