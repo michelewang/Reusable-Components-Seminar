@@ -35,13 +35,15 @@ class List extends Component {
         return (
             <View style={styles.wrap}>
                 <Text style={styles.title}>{this.props.title}</Text>
-                {this.props.cards.map(card => <Card key={card.id} {...card} />)}
+                <View>
+                    {this.props.cards.map(card => <Card key={card.id} {...card} />)}
+                </View>
                 <TextInput
-                  style={styles.inputs}
-                  onChangeText={cardInput => {
-                    this.setState({ cardInput });
-                  }}
-                  value={this.state.cardInput}
+                    style={styles.inputs}
+                    onChangeText={cardInput => {
+                        this.setState({ cardInput });
+                    }}
+                    value={this.state.cardInput}
                 />
                 <Button onClick={this.addCard} text="+ Create Card" />
             </View>

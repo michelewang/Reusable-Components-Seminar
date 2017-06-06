@@ -39,10 +39,10 @@ export default (state = initialState, action) => {
             ...b,
             lists: b.lists.map(l => ({
                 ...l,
-                cards: l.id === action.payload.listId ? {...l, cards: [newCard, ...l.cards]} : l
+                cards: l.id === action.payload.listId ? [newCard, ...l.cards] : l.cards
             }))
         }))
-
+        
         return Object.assign({}, state, {
             boards: [...newBoards]
         })
