@@ -16,7 +16,7 @@ const USERS = { name: "Admin" }
 
 const customTextProps = { 
   style: { 
-    fontFamily: 'Futura'
+
   }
 }
 setCustomText(customTextProps);

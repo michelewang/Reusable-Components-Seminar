@@ -50,7 +50,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#263238"
   },
   delete: {
-    backgroundColor: "#D50000"
+    backgroundColor: "#D50000",
+    height: 25,
+    width: 25
   },
   create: {
     backgroundColor: "#283593"
