@@ -31,7 +31,7 @@ class App extends Component {
     }
   }
 
-  createBoard = () => {
+  addBoard = () => {
     this.props.addBoard(this.state.boardInput)
   }
 
@@ -46,7 +46,7 @@ class App extends Component {
           }}
           value={this.state.boardInput}
         />
-        <Button onClick={this.createBoard} text="Create Board" />
+        <Button onClick={this.addBoard} text="Create Board" />
 
         <View>{this.props.boards.map((b, i) => <Board key={i} {...b} />)}</View>
       </ScrollView>

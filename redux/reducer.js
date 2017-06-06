@@ -4,7 +4,9 @@ import {
   DELETE_CARD,
   MOVE_CARD,
   ADD_LIST,
-  ADD_BOARD
+  DELETE_LIST,
+  ADD_BOARD,
+  DELETE_BOARD
 } from "./actions"
 
 const initialState = {
@@ -16,16 +18,24 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case ADD_BOARD: {
       state.boards.forEach(b => {
-        if (b.name === action.payload.title) throw new Error("Boards must have unique names")
+        if (b.name === action.payload.name) throw new Error("Boards must have unique names")
       })
 
       const newBoard = {
-        name: action.payload.title,
+        name: action.payload.name,
         lists: []
       }
 
       return Object.assign({}, state, {
         boards: [...state.boards, newBoard]
+      })
+    }
+
+    case DELETE_BOARD: {
+      let newBoards = state.boards.filter(b => b.name !== action.payload.name)
+
+      return Object.assign({}, state, {
+        boards: [...newBoards]
       })
     }
 
@@ -39,6 +49,17 @@ export default (state = initialState, action) => {
       let newBoards = state.boards.map(b => ({
         ...b,
         lists: b.name === action.payload.boardName ? [...b.lists, newList] : b.lists
+      }))
+
+      return Object.assign({}, state, {
+        boards: [...newBoards]
+      })
+    }
+
+    case DELETE_LIST: {
+      let newBoards = state.boards.map(b => ({
+        ...b,
+        lists: b.lists.filter(l => l.id !== action.payload.id)
       }))
 
       return Object.assign({}, state, {

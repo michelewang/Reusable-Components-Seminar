@@ -3,18 +3,21 @@ import { StyleSheet, View, TouchableOpacity, Text, TextInput } from "react-nativ
 import PropTypes from "prop-types"
 import Button from "../Button"
 import List from "../List"
-import { addList } from "../../redux/actions"
+import { addList, deleteBoard } from "../../redux/actions"
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
 
 const mapDispatchToProps = dispatch => ({
-  addList: bindActionCreators(addList, dispatch)
+  addList: bindActionCreators(addList, dispatch),
+  deleteBoard: bindActionCreators(deleteBoard, dispatch)
 })
 
 class Board extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
-    lists: PropTypes.array.isRequired
+    lists: PropTypes.array.isRequired,
+    addList: PropTypes.func.isRequired,
+    deleteBoard: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -28,10 +31,15 @@ class Board extends Component {
     this.props.addList(this.state.listInput, this.props.name)
   }
 
+  deleteBoard = () => {
+    this.props.deleteBoard(this.props.name)
+  }
+
   render() {
     return (
       <View style={styles.wrap}>
         <Text style={styles.title}>{this.props.name}</Text>
+        <Button onClick={this.deleteBoard} text="&#10005;" />
         <View>
           {this.props.lists.map((l, i) => <List {...l} key={l.id} />)}
         </View>

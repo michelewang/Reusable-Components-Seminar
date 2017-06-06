@@ -3,12 +3,13 @@ import { StyleSheet, View, Text, TextInput } from "react-native"
 import PropTypes from "prop-types"
 import Button from "../Button"
 import Card from "../Card"
-import { addCard } from "../../redux/actions"
+import { addCard, deleteList } from "../../redux/actions"
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
 
 const mapDispatchToProps = dispatch => ({
-  addCard: bindActionCreators(addCard, dispatch)
+  addCard: bindActionCreators(addCard, dispatch),
+  deleteList: bindActionCreators(deleteList, dispatch)
 })
 
 class List extends Component {
@@ -16,7 +17,8 @@ class List extends Component {
     title: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
     cards: PropTypes.array.isRequired,
-    addCard: PropTypes.func.isRequired
+    addCard: PropTypes.func.isRequired,
+    deleteList: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -30,10 +32,15 @@ class List extends Component {
     this.props.addCard(this.state.cardInput, this.props.id)
   }
 
+  deleteList = () => {
+    this.props.deleteList(this.props.id)
+  }
+
   render() {
     return (
       <View style={styles.wrap}>
         <Text style={styles.title}>{this.props.title}</Text>
+        <Button onClick={this.deleteList} text="&#10005;" />
         <View>
           {this.props.cards.map(card => <Card key={card.id} {...card} />)}
         </View>
