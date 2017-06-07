@@ -4,8 +4,6 @@ import {
   View,
   Text,
   TextInput,
-  PanResponder,
-  Animated,
   Dimensions,
 } from "react-native"
 import PropTypes from "prop-types"
@@ -34,31 +32,8 @@ class List extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      cardInput: " Enter Card Name",
-      showDraggable: true,
-      pan: new Animated.ValueXY(),
+      cardInput: " Enter Card Name"
     }
-
-    this.panResponder = PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-        onPanResponderMove: Animated.event([null,{
-            dx: this.state.pan.x,
-            dy: this.state.pan.y
-        }]),
-        onPanResponderRelease: (e, gesture) => {
-          if(this.isDropZone(gesture)) {
-            this.setState({
-              showDraggable: false,
-            });
-          }
-          else {
-            Animated.spring(
-              this.state.pan,
-              {toValue: {x:0, y:0}}
-            ).start();
-          }
-        }
-      });
   }
 
   setDropZoneValues = (event) => {
@@ -67,10 +42,10 @@ class List extends Component {
     });
   }
 
-  isDropZone = (gesture) => {
-    var dz = this.state.dropZoneValues;
-    return gesture.moveY > dz.y && gesture.moveY < dz.y + dz.height;
-  }
+  // isDropZone = (gesture) => {
+  //   var dz = this.state.dropZoneValues;
+  //   return gesture.moveY > dz.y && gesture.moveY < dz.y + dz.height;
+  // }
 
   deleteList = () => {
     this.props.deleteList(this.props.id)
@@ -89,17 +64,11 @@ class List extends Component {
       <View style={styles.wrap}>
         <View
           style={[styles.dropZone, styles.topRow]}
-          onLayout={this.setDropZoneValues.bind(this)}
-        >
+          onLayout={this.setDropZoneValues.bind(this)}>
           <Text style={styles.title}>{this.props.title}</Text>
-          <Text>Drop me here!</Text>
           <Button onClick={this.deleteList} text="&#10005;" style="delete" textColor="red" />
         </View>
-          <Animated.View
-            {...this.panResponder.panHandlers}
-            style={[this.state.pan.getLayout()]}>
-            {this.props.cards.map(card => <Card key={card.id} {...card} />)}
-          </Animated.View>
+        {this.props.cards.map(card => <Card key={card.id} {...card} />)}
         <Button onClick={() => this.showModal("Card", this.props.id)} text="+ Create Card" style="create" textColor="white" />
       </View>
     )
@@ -108,7 +77,7 @@ class List extends Component {
 
 const styles = StyleSheet.create({
   dropZone: {
-    height: 50,
+    height: 40,
   },
   wrap: {
     backgroundColor: "#EF5350",
@@ -117,11 +86,15 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 10,
     borderRadius: 5,
-    margin: 10
+    margin: 10,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 3,
   },
   topRow: {
     flexDirection: "row",
     display: "flex",
+    justifyContent: "space-between",
   },
   title: {
     textAlign: "center",

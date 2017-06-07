@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: "center",
     justifyContent: "center",
-    margin: 3
+    margin: 3,
   },
   red: {
     fontSize: 25,
@@ -51,7 +51,10 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   default: {
-    backgroundColor: "#FFA726"
+    backgroundColor: "#FFA726",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
   },
   arrow: {
     backgroundColor: "#263238"
@@ -61,9 +64,15 @@ const styles = StyleSheet.create({
     width: 40
   },
   create: {
-    backgroundColor: "#283593"
+    backgroundColor: "#283593",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 3,
   },
   cancel: {
-    backgroundColor: "#D50000"
+    backgroundColor: "#D50000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 3,
   }
 })

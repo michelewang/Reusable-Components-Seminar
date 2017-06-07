@@ -63,6 +63,9 @@ const styles = StyleSheet.create({
     margin: 5,
     padding: 10,
     borderRadius: 2,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 3,
   },
   topRow: {
     flexDirection: "row",
