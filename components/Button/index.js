@@ -12,7 +12,10 @@ export default class Button extends Component {
       "create",
       "default",
       "boards"
-    ]).isRequired
+    ]).isRequired,
+    textStyle: PropTypes.oneOf([
+      "board",
+    ])
   }
 
   static defaultProps = {
@@ -25,7 +28,7 @@ export default class Button extends Component {
         onPress={this.props.onClick}
         style={[styles.button, styles[this.props.style]]}
       >
-        <Text style={styles.text}>{this.props.text}</Text>
+        <Text style={textStyles[this.props.textStyle]}>{this.props.text}</Text>
       </TouchableOpacity>
     )
   }
@@ -39,11 +42,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     margin: 3
   },
-  text: {
-    fontSize: 10,
-    fontWeight: "bold",
-    color: "#fff",
-  },
   default: {
     backgroundColor: "#FFA726"
   },
@@ -51,7 +49,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#DD2C00",
     height: 150,
     width: 225,
-    margin: 60,
+    margin: 70,
   },
   arrow: {
     backgroundColor: "#263238"
@@ -63,5 +61,16 @@ const styles = StyleSheet.create({
   },
   create: {
     backgroundColor: "#283593"
+  }
+})
+
+const textStyles = StyleSheet.create({
+  default: {
+    fontSize: 10,
+    fontWeight: "bold",
+    color: "#fff",
+  },
+  board: {
+    fontSize: 45
   }
 })

@@ -44,7 +44,7 @@ class App extends Component {
   render() {
     return (
       <KeyboardAwareScrollView style={styles.view}>
-        <Text style={styles.header}>Your Boards</Text>
+        <Text style={styles.header}>DEVELLO</Text>
         <TextInput
           style={styles.inputs}
           clearTextOnFocus={true}
@@ -72,11 +72,11 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 10,
     backgroundColor: "white",
-    marginTop: Constants.statusBarHeight
   },
   header: {
     fontSize: 30,
-    textAlign: "center"
+    textAlign: "center",
+    marginTop: 15
   }
 })
 

@@ -51,6 +51,7 @@ class HomeScreen extends React.Component {
 				<Button 
 					onClick={() => navigate('Root')}
 					style="boards"
+					textStyle="board"
 					text='BOARDS'/>
 			</View> 
 		)
