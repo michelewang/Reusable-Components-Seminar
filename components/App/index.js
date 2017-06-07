@@ -1,62 +1,71 @@
 import React, { Component } from "react"
-import { ScrollView, StyleSheet, View, TextInput, Text} from "react-native"
+import {
+  Text,
+  TouchableHighlight,
+  ScrollView,
+  StyleSheet,
+  View,
+  TextInput
+} from "react-native"
 import PropTypes from "prop-types"
 import { Constants } from "expo"
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { StackNavigator } from 'react-navigation'
+import { setCustomText } from 'react-native-global-props'
 
+import TextModal from "../Modal"
 import Board from "../Board"
 import Button from "../Button"
-import { addBoard } from "../../redux/actions"
+import { showModal, hideModal } from "../../redux/actions"
 
 const BOARDS = [{ name: "Bootcamp" }]
 const USERS = { name: "Admin" }
 
-const mapStateToProps = state => ({ boards: state.boards, user: state.user })
+const customTextProps = {
+  style: {
+    fontFamily: "Futura"
+  }
+}
+setCustomText(customTextProps);
+
+const mapStateToProps = state => ({ boards: state.boards, user: state.user})
 const mapDispatchToProps = dispatch => ({
-  addBoard: bindActionCreators(addBoard, dispatch)
+  showModal: bindActionCreators(showModal, dispatch),
+  hideModal: bindActionCreators(hideModal, dispatch)
 })
 
 class App extends Component {
   static propTypes = {
     boards: PropTypes.array.isRequired,
     user: PropTypes.object.isRequired,
-    addBoard: PropTypes.func.isRequired
+    showModal: PropTypes.func.isRequired,
+    hideModal: PropTypes.func.isRequired
   }
 
   static navigationOptions = {
     title: "BOARDS"
   }
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      boardInput: " Enter Board Name"
-    }
+  showModal = comp => {
+    this.props.showModal(comp)
   }
 
-  addBoard = () => {
-    this.props.addBoard(this.state.boardInput)
+  hideModal = () => {
+    this.props.hideModal()
   }
 
   render() {
     return (
-      <KeyboardAwareScrollView style={styles.view}>
-        <Text style={styles.header}>DEVELLO</Text>
-        <TextInput
-          style={styles.inputs}
-          clearTextOnFocus={true}
-          onChangeText={boardInput => {
-            this.setState({ boardInput })
-          }}
-          value={this.state.boardInput}
-        />
-        <Button onClick={this.addBoard} text=" + Create Board" style="create"/>
-
+      <ScrollView style={styles.view}>
+        <KeyboardAwareScrollView>
+          <TextModal onCancel={this.props.hideModal} />
+        </KeyboardAwareScrollView>
+        <Text style={styles.header}>Devello!</Text>
+        <Button onClick={() => this.showModal("Board")} text=" + Create Board" style="create" textColor="white" />
         <View>{this.props.boards.map((b, i) => <Board key={i} {...b} />)}</View>
-      </KeyboardAwareScrollView>
+      </ScrollView>
     )
   }
 }
