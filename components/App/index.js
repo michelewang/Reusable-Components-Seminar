@@ -5,7 +5,7 @@ import { Constants } from "expo"
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { setCustomText } from 'react-native-global-props';
+import { StackNavigator } from 'react-navigation'
 
 import Board from "../Board"
 import Button from "../Button"
@@ -13,13 +13,6 @@ import { addBoard } from "../../redux/actions"
 
 const BOARDS = [{ name: "Bootcamp" }]
 const USERS = { name: "Admin" }
-
-const customTextProps = { 
-  style: { 
-
-  }
-}
-setCustomText(customTextProps);
 
 const mapStateToProps = state => ({ boards: state.boards, user: state.user })
 const mapDispatchToProps = dispatch => ({
@@ -31,6 +24,10 @@ class App extends Component {
     boards: PropTypes.array.isRequired,
     user: PropTypes.object.isRequired,
     addBoard: PropTypes.func.isRequired
+  }
+
+  static navigationOptions = {
+    title: "BOARDS"
   }
 
   constructor(props) {
@@ -47,7 +44,7 @@ class App extends Component {
   render() {
     return (
       <KeyboardAwareScrollView style={styles.view}>
-        <Text style={styles.header}>Welcome to Devello!</Text>
+        <Text style={styles.header}>Your Boards</Text>
         <TextInput
           style={styles.inputs}
           clearTextOnFocus={true}
@@ -78,7 +75,6 @@ const styles = StyleSheet.create({
     marginTop: Constants.statusBarHeight
   },
   header: {
-    marginTop: 10,
     fontSize: 30,
     textAlign: "center"
   }

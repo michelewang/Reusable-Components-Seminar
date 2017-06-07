@@ -10,7 +10,8 @@ export default class Button extends Component {
       "arrow",
       "delete",
       "create",
-      "default"
+      "default",
+      "boards"
     ]).isRequired
   }
 
@@ -45,6 +46,12 @@ const styles = StyleSheet.create({
   },
   default: {
     backgroundColor: "#FFA726"
+  },
+  boards: {
+    backgroundColor: "#DD2C00",
+    height: 150,
+    width: 225,
+    margin: 60,
   },
   arrow: {
     backgroundColor: "#263238"

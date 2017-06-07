@@ -11,7 +11,9 @@ import {
 
 const initialState = {
   boards: [],
-  user: {}
+  user: {},
+  nextCardId: 0,
+  nextListId: 0
 }
 
 export default (state = initialState, action) => {
@@ -41,7 +43,7 @@ export default (state = initialState, action) => {
 
     case ADD_LIST: {
       const newList = {
-        id: action.payload.id,
+        id: state.nextListId++,
         title: action.payload.title,
         cards: []
       }
@@ -69,7 +71,7 @@ export default (state = initialState, action) => {
 
     case ADD_CARD: {
       const newCard = {
-        id: action.payload.id,
+        id: state.nextCardId++,
         text: action.payload.text
       }
 
