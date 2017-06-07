@@ -1,20 +1,31 @@
 import React, { Component } from "react"
-import { ScrollView, StyleSheet, View, TextInput, KeyboardAvoidingView } from "react-native"
+import {
+  Text,
+  TouchableHighlight,
+  ScrollView,
+  StyleSheet,
+  View,
+  TextInput
+} from "react-native"
+import Modal from 'react-native-modal'
 import PropTypes from "prop-types"
 import { Constants } from "expo"
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
 
+import TextModal from "../Modal"
 import Board from "../Board"
 import Button from "../Button"
-import { addBoard } from "../../redux/actions"
+import { addBoard, showModal, hideModal } from "../../redux/actions"
 
 const BOARDS = [{ name: "Bootcamp" }]
 const USERS = { name: "Admin" }
 
 const mapStateToProps = state => ({ boards: state.boards, user: state.user })
 const mapDispatchToProps = dispatch => ({
-  addBoard: bindActionCreators(addBoard, dispatch)
+  addBoard: bindActionCreators(addBoard, dispatch),
+  showModal: bindActionCreators(showModal, dispatch),
+  hideModal: bindActionCreators(hideModal, dispatch)
 })
 
 class App extends Component {
@@ -35,10 +46,19 @@ class App extends Component {
     this.props.addBoard(this.state.boardInput)
   }
 
+  showModal = () => {
+    this.props.showModal()
+  }
+
+  hideModal = () => {
+    this.props.hideModal()
+  }
+
   render() {
+    console.log(this.props.boards)
     return (
-      //<KeyboardAvoidingView behavior="padding">
       <ScrollView style={styles.view}>
+        <TextModal onCancel={this.props.hideModal}></TextModal>
         <TextInput
           style={styles.inputs}
           onChangeText={boardInput => {
@@ -46,11 +66,10 @@ class App extends Component {
           }}
           value={this.state.boardInput}
         />
-        <Button onClick={this.addBoard} text="Create Board" />
+        <Button onClick={this.props.showModal} text="Create Board" />
 
         <View>{this.props.boards.map((b, i) => <Board key={i} {...b} />)}</View>
       </ScrollView>
-      //</KeyboardAvoidingView>
     )
   }
 }

@@ -2,6 +2,9 @@ let nextCardId = 0
 let nextListId = 0
 
 // declare the action types
+export const SHOW_MODAL = "SHOW_MODAL"
+export const HIDE_MODAL = "HIDE_MODAL"
+
 export const ADD_BOARD = "ADD_BOARD"
 export const DELETE_BOARD = "DELETE_BOARD"
 
@@ -11,6 +14,11 @@ export const DELETE_LIST = "DELETE_LIST"
 export const ADD_CARD = "ADD_CARD"
 export const DELETE_CARD = "DELETE_CARD"
 export const MOVE_CARD = "MOVE_CARD"
+
+// action creators for modals
+export const showModal = () => ({ type: SHOW_MODAL })
+
+export const hideModal = () => ({ type: HIDE_MODAL })
 
 // action creators for board
 export const addBoard = name => ({ type: ADD_BOARD, payload: { name } })

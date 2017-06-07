@@ -1,5 +1,11 @@
 import React, { Component } from "react"
-import { StyleSheet, View, TouchableOpacity, Text, TextInput } from "react-native"
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Text,
+  TextInput
+} from "react-native"
 import PropTypes from "prop-types"
 import Button from "../Button"
 import List from "../List"

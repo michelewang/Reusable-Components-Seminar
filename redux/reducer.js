@@ -1,5 +1,7 @@
 import { combineReducers } from "redux"
 import {
+  SHOW_MODAL,
+  HIDE_MODAL,
   ADD_CARD,
   DELETE_CARD,
   MOVE_CARD,
@@ -11,11 +13,26 @@ import {
 
 const initialState = {
   boards: [],
-  user: {}
+  user: {},
+  isShowing: false
 }
 
-export default (state = initialState, action) => {
+export default (state = {boards: [], user: {}}, action) => {
   switch (action.type) {
+    case SHOW_MODAL: {
+      console.log("showed")
+      return Object.assign({}, state, {
+        isShowing: true,
+      })
+    }
+
+    case HIDE_MODAL: {
+      console.log('hid')
+      return Object.assign({}, state, {
+        isShowing: false
+      })
+    }
+
     case ADD_BOARD: {
       state.boards.forEach(b => {
         if (b.name === action.payload.name) throw new Error("Boards must have unique names")
@@ -145,3 +162,8 @@ export default (state = initialState, action) => {
       return state
   }
 }
+
+// export default combineReducers({
+//   modals,
+//   planes
+// })
