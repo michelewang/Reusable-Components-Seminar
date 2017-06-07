@@ -1,5 +1,9 @@
 import React, { Component } from "react"
-import { StyleSheet, View, Text } from "react-native"
+import {
+  StyleSheet,
+  View,
+  Text
+  } from "react-native"
 import PropTypes from "prop-types"
 import Button from "../Button"
 import { deleteCard, moveCard } from "../../redux/actions"
@@ -42,9 +46,9 @@ class Card extends Component {
           <Text>{this.props.text}</Text>
         </View>
         <View style={styles.wrapButtons}>
-          <Button onClick={this.moveBackward} text="&#8593;" />
-          <Button onClick={this.moveForward} text="&#8595;" />
-          <Button onClick={this.deleteCard} text="&#10005;" />
+          <Button onClick={this.moveBackward} text="&#8593;" style="arrow" textColor="white" />
+          <Button onClick={this.moveForward} text="&#8595;" style="arrow" textColor="white" />
+          <Button onClick={this.deleteCard} text="&#10005;" style="delete" textColor="red" />
         </View>
       </View>
     )

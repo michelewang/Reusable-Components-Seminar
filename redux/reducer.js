@@ -14,22 +14,23 @@ import {
 const initialState = {
   boards: [],
   user: {},
-  isShowing: false
+  visible: false,
+  parent: {}
 }
 
-export default (state = {boards: [], user: {}}, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case SHOW_MODAL: {
-      console.log("showed")
       return Object.assign({}, state, {
-        isShowing: true,
+        visible: true,
+        comp: action.payload.comp,
+        parent: action.payload.parent
       })
     }
 
     case HIDE_MODAL: {
-      console.log('hid')
       return Object.assign({}, state, {
-        isShowing: false
+        visible: false
       })
     }
 

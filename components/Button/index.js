@@ -5,11 +5,12 @@ import PropTypes from "prop-types"
 export default class Button extends Component {
   static propTypes = {
     text: PropTypes.string,
+    textColor: PropTypes.oneOf(["red", "white"]),
     onClick: PropTypes.func.isRequired,
     style: PropTypes.oneOf([
-      "forward",
-      "backward",
+      "arrow",
       "delete",
+      "cancel",
       "create",
       "default"
     ]).isRequired
@@ -25,7 +26,7 @@ export default class Button extends Component {
         onPress={this.props.onClick}
         style={[styles.button, styles[this.props.style]]}
       >
-        <Text style={styles.text}>{this.props.text}</Text>
+        <Text style={[styles[this.props.textColor]]}>{this.props.text}</Text>
       </TouchableOpacity>
     )
   }
@@ -33,30 +34,36 @@ export default class Button extends Component {
 
 const styles = StyleSheet.create({
   button: {
-    padding: 5,
+    padding: 10,
     borderRadius: 5,
     alignItems: "center",
     justifyContent: "center",
     margin: 3
   },
-  text: {
+  red: {
+    fontSize: 25,
+    fontWeight: "bold",
+    color: "#D50000",
+  },
+  white: {
     fontSize: 10,
     fontWeight: "bold",
-    color: "#fff"
+    color: "#fff",
   },
   default: {
-    backgroundColor: "#08f"
+    backgroundColor: "#FFA726"
   },
-  forward: {
-    backgroundColor: "#34ff1a"
-  },
-  backward: {
-    backgroundColor: "green"
+  arrow: {
+    backgroundColor: "#263238"
   },
   delete: {
-    backgroundColor: "#ff0300"
+    height: 25,
+    width: 40
   },
   create: {
-    backgroundColor: "#34ff1a"
+    backgroundColor: "#283593"
+  },
+  cancel: {
+    backgroundColor: "#D50000"
   }
 })

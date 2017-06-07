@@ -16,7 +16,13 @@ export const DELETE_CARD = "DELETE_CARD"
 export const MOVE_CARD = "MOVE_CARD"
 
 // action creators for modals
-export const showModal = () => ({ type: SHOW_MODAL })
+export const showModal = (comp, parent) => ({
+  type: SHOW_MODAL,
+  payload: {
+    comp,
+    parent
+  }
+})
 
 export const hideModal = () => ({ type: HIDE_MODAL })
 
