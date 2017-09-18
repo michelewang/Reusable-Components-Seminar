@@ -1,6 +1,3 @@
-// let nextCardId = 0
-// let nextListId = 0
-
 // declare the action types
 export const SHOW_MODAL = "SHOW_MODAL"
 export const HIDE_MODAL = "HIDE_MODAL"

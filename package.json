@@ -1,10 +1,10 @@
 {
   "name": "rn-devello",
   "version": "0.0.0",
-  "description": "Hello Expo!",
+  "description": "React-Native Tutorial",
   "author": null,
   "private": true,
-  "main": "main.js",
+  "main": "./src/main.js",
   "dependencies": {
     "expo": "17.0.0",
     "prettier": "^1.4.2",

@@ -8,44 +8,27 @@ import {
   TextInput
 } from "react-native"
 import PropTypes from "prop-types"
-import { Constants } from "expo"
 import { connect } from "react-redux"
-import { bindActionCreators } from "redux"
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { StackNavigator } from 'react-navigation'
-import { setCustomText } from 'react-native-global-props'
-
-import TextModal from "../Modal"
-import Board from "../Board"
-import Button from "../Button"
+import {
+  TextModal,
+  Board,
+  Button
+} from '../../components'
 import { showModal, hideModal } from "../../redux/actions"
 
 const BOARDS = [{ name: "Bootcamp" }]
 const USERS = { name: "Admin" }
 
-const customTextProps = {
-  style: {
-    fontFamily: "Futura"
-  }
-}
-setCustomText(customTextProps);
-
 const mapStateToProps = state => ({ boards: state.boards, user: state.user})
-const mapDispatchToProps = dispatch => ({
-  showModal: bindActionCreators(showModal, dispatch),
-  hideModal: bindActionCreators(hideModal, dispatch)
-})
+const mapDispatchToProps = { showModal, hideModal }
 
-class App extends Component {
+class PlannerScreen extends Component {
   static propTypes = {
     boards: PropTypes.array.isRequired,
     user: PropTypes.object.isRequired,
     showModal: PropTypes.func.isRequired,
     hideModal: PropTypes.func.isRequired
-  }
-
-  static navigationOptions = {
-    title: "BOARDS"
   }
 
   showModal = comp => {
@@ -89,4 +72,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(PlannerScreen)
