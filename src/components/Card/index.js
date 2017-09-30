@@ -1,24 +1,12 @@
 import React, { Component } from "react"
-import {
-  StyleSheet,
-  View,
-  Text,
-  PanResponder,
-  Animated,
-  Dimensions,
-  Vibration
-  } from "react-native"
+import { View, Text } from "react-native"
 import PropTypes from "prop-types"
 import Button from "../Button"
-import Overlay from "react-native-overlay"
 import { deleteCard, moveCard } from "../../redux/actions"
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
 
-const mapDispatchToProps = dispatch => ({
-  deleteCard: bindActionCreators(deleteCard, dispatch),
-  moveCard: bindActionCreators(moveCard, dispatch)
-})
+const mapDispatchToProps = { deleteCard, moveCard }
 
 class Card extends Component {
   static propTypes = {
@@ -27,57 +15,7 @@ class Card extends Component {
     moveCard: PropTypes.func.isRequired,
     deleteCard: PropTypes.func.isRequired
   }
-  constructor(props) {
-    super(props)
-    this.state = {
-      pan: new Animated.ValueXY(),
-      size: new Animated.Value(80),
-    }
-    this.panResponder = PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-      onPanResponderMove: Animated.event([null, {
-        dx: this.state.pan.x,
-        dy: this.state.pan.y,
-      }]),
-      // onPanResponderMove: Animated.event([
-      //   null,
-      //   {dx: this.state.pan.x, dy: this.state.pan.y},
-      // ])
-      onPanResponderGrant: (e, gesture) => {
-        Animated.spring(
-          this.state.size,
-          {
-            toValue: 120,
-            friction: 1,
-          }
-        ).start()
-      },
-      onPanResponderRelease: (e, gesture) => {
-        // if(this.isDropZone(gesture)) {
-        //   this.setState({
-        //     // showDraggable: false,
-        //     // delete card
-        //   });
-        // }
-        // else {
-          Animated.parallel([
-            Animated.spring(
-              this.state.pan,
-              {toValue: {x:0, y:0}}
-            ),
-            Animated.spring(
-              this.state.size,
-              {
-                toValue: 80,
-                friction: 1,
-              }
-            ),
-          ]).start()
 
-        // }
-      },
-    });
-  }
   static defaultProps = {
     text: "this is dope like the card team"
   }
@@ -109,29 +47,5 @@ class Card extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  card: {
-    backgroundColor: "#fffafa",
-    borderRadius: 5,
-    padding: 15,
-    display: "flex",
-    flexDirection: "row",
-    margin: 10,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.8,
-    shadowRadius: 3,
-  },
-  textWrap: {
-    flex: 3,
-    justifyContent: "center"
-  },
-  wrapButtons: {
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    flex: 1
-  }
-})
 
 export default connect(null, mapDispatchToProps)(Card)

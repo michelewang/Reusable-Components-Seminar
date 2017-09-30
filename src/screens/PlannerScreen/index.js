@@ -1,75 +1,57 @@
 import React, { Component } from "react"
 import {
   Text,
-  TouchableHighlight,
   ScrollView,
-  StyleSheet,
-  View,
-  TextInput
+  View
 } from "react-native"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import {
-  TextModal,
+  AddModal,
   Board,
   Button
 } from '../../components'
 import { showModal, hideModal } from "../../redux/actions"
-
-const BOARDS = [{ name: "Bootcamp" }]
-const USERS = { name: "Admin" }
+import styles from './styles'
 
 const mapStateToProps = state => ({ boards: state.boards, user: state.user})
-const mapDispatchToProps = { showModal, hideModal }
 
 class PlannerScreen extends Component {
   static propTypes = {
     boards: PropTypes.array.isRequired,
     user: PropTypes.object.isRequired,
-    showModal: PropTypes.func.isRequired,
-    hideModal: PropTypes.func.isRequired
   }
 
-  showModal = comp => {
-    this.props.showModal(comp)
+  constructor(props) {
+    super(props);
+    this.state = {
+      addModalVisible: false
+    }
   }
 
-  hideModal = () => {
-    this.props.hideModal()
+  toggleAddModalVisible = (addModalVisible) => {
+    this.setState({addModalVisible})
   }
 
   render() {
     return (
       <ScrollView style={styles.view}>
-        <KeyboardAwareScrollView>
-          <TextModal onCancel={this.props.hideModal} />
-        </KeyboardAwareScrollView>
+        <AddModal 
+          addModalVisible={this.state.addModalVisible}
+          toggleAddModalVisible={this.toggleAddModalVisible}
+          type='Board'
+        />
         <Text style={styles.header}>Devello!</Text>
-        <Button onClick={() => this.showModal("Board")} text=" + Create Board" style="create" textColor="white" />
+        <Button 
+          onClick={() => this.toggleAddModalVisible(true)} 
+          text="+ Create Board" 
+          style="create" 
+          textColor="white" 
+        />
         <View>{this.props.boards.map((b, i) => <Board key={i} {...b} />)}</View>
       </ScrollView>
     )
   }
 }
 
-const styles = StyleSheet.create({
-  inputs: {
-    marginTop: 30,
-    height: 40,
-    borderColor: "white",
-    borderWidth: 1,
-  },
-  view: {
-    flex: 1,
-    height: 10,
-    backgroundColor: "white",
-  },
-  header: {
-    fontSize: 30,
-    textAlign: "center",
-    marginTop: 15
-  }
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(PlannerScreen)
+export default connect(mapStateToProps)(PlannerScreen)

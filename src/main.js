@@ -6,15 +6,8 @@ import store from './redux/store'
 
 // Import Navigators
 import RootNavigator from './navigations/RootNavigator'
-/*<View> 
-        	<Text>
-        	
-        	</Text>
-        </View>
-        */
-class Root extends Component {
+class Main extends Component {
   render() {
-  	console.log("im here", store)
     return (
       <Provider store={store}>
       	<RootNavigator />
@@ -23,4 +16,4 @@ class Root extends Component {
   }
 }
 
-Expo.registerRootComponent(Root)
+Expo.registerRootComponent(Main)

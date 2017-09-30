@@ -5,7 +5,8 @@ import reducer from "./reducer"
 
 const store = createStore(reducer, undefined, autoRehydrate())
 
-persistStore(store, {storage: AsyncStorage})
+const persistor = persistStore(store, {storage: AsyncStorage})
+//persistor.purge()
 
 //const store = createStore(reducer);
 
