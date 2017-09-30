@@ -16,7 +16,7 @@ import styles from './styles'
 
 const mapStateToProps = state => ({ boards: state.boards, user: state.user})
 
-class PlannerScreen extends Component {
+class MainScreen extends Component {
   static propTypes = {
     boards: PropTypes.array.isRequired,
     user: PropTypes.object.isRequired,
@@ -54,4 +54,4 @@ class PlannerScreen extends Component {
   }
 }
 
-export default connect(mapStateToProps)(PlannerScreen)
+export default connect(mapStateToProps)(MainScreen)

@@ -6,11 +6,9 @@ import {
   Dimensions,
 } from "react-native"
 import PropTypes from "prop-types"
-import Button from "../Button"
-import Card from "../Card"
 import { deleteList } from "../../redux/actions"
 import { connect } from "react-redux"
-import { bindActionCreators } from "redux"
+import { AddModal, Button, Card } from '../index'
 import styles from './styles'
 
 const mapDispatchToProps = { deleteList }

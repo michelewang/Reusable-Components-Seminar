@@ -1,11 +1,11 @@
 import { StackNavigator } from 'react-navigation'
 
 // import screens
-import { PlannerScreen } from '../screens'
+import { MainScreen } from '../screens'
 
 export default RootNavigator = StackNavigator({
-  PlannerScreen: { 
-    screen: PlannerScreen,
+  MainScreen: { 
+    screen: MainScreen,
     navigationOptions: {
       title: "BOARDS"
     }

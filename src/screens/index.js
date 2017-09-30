@@ -1,1 +1,1 @@
-export {default as PlannerScreen} from './PlannerScreen'
+export {default as MainScreen} from './MainScreen'

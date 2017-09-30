@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native'
 
 export default styles = StyleSheet.create({
   card: {
-    backgroundColor: "#fffafa",
+    backgroundColor: "white",
     borderRadius: 5,
     padding: 15,
     display: "flex",
@@ -13,8 +13,9 @@ export default styles = StyleSheet.create({
     shadowRadius: 3,
   },
   textWrap: {
-    flex: 3,
-    justifyContent: "center"
+    flex: 1,
+    justifyContent: "center",
+    alignItems: 'center'
   },
   wrapButtons: {
     flexDirection: "column",

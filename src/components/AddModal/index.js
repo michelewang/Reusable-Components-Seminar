@@ -21,18 +21,17 @@ class AddModal extends Component {
 
   addBoard = () => {
     this.props.addBoard(this.state.input)
-    this.props.toggleAddModalVisible(false)
+    this.onCancel()
   }
 
   addList = () => {
-    console.log('im here', this.props)
-    this.props.addList(this.state.input, this.props.boardId)
-    this.props.toggleAddModalVisible(false)
+    this.props.addList(this.state.input, this.props.boardName)
+    this.onCancel()
   }
 
   addCard = () => {
     this.props.addCard(this.state.input, this.props.listId)
-    this.props.toggleAddModalVisible(false)
+    this.onCancel()
   }
 
   onCancel = () => {

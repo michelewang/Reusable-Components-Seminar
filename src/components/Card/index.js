@@ -5,6 +5,7 @@ import Button from "../Button"
 import { deleteCard, moveCard } from "../../redux/actions"
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
+import styles from './styles'
 
 const mapDispatchToProps = { deleteCard, moveCard }
 

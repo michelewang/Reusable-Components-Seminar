@@ -33,12 +33,13 @@ class Board extends Component {
 
   render() {
     return (
+
       <View style={styles.wrap}>
         <AddModal 
           addModalVisible={this.state.addModalVisible}
           toggleAddModalVisible={this.toggleAddModalVisible}
           type={'List'}
-          boardId={this.props.id}
+          boardName={this.props.name}
         />
         <View style={styles.topRow}>
           <Text style={styles.title}>{this.props.name}</Text>

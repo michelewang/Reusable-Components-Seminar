@@ -129,7 +129,6 @@ export default (state = initialState, action) => {
       let bindex
       let lindex
       let card
-      console.log('this is the payload', action.payload)
       let newBoards = state.boards.map((b, bi) => ({
         ...b,
         lists: b.lists.map((l, li) => ({
@@ -145,15 +144,12 @@ export default (state = initialState, action) => {
           })
         }))
       }))
-      console.log('this is newBoards', newBoards)
-      console.log('here are the data', bindex, lindex)
       if (bindex == null || lindex == null)
         throw new Error("no card with that id")
       if (
         lindex + action.payload.dir < 0 ||
         lindex + action.payload.dir >= state.boards[bindex].lists.length
       ) {
-        console.log('look here', state.boards[bindex].lists.length)
         return state
       }
 
