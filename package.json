@@ -1,22 +1,41 @@
 {
-  "name": "rn-devello",
+  "name": "Reusable-Components-Seminar",
   "version": "0.0.0",
-  "description": "React-Native Tutorial",
+  "description": "Examples of reusable and customizable components",
   "author": null,
   "private": true,
   "main": "./src/main.js",
+  "devDependencies": {
+    "babel-eslint": "^8.2.1",
+    "eslint": "^4.18.0",
+    "eslint-plugin-jest": "^21.12.2",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-react": "^7.6.1",
+    "jest-expo": "25.0.0",
+    "react-native-scripts": "1.11.1",
+    "react-test-renderer": "16.2.0"
+  },
+  "scripts": {
+    "start": "react-native-scripts start",
+    "eject": "react-native-scripts eject",
+    "android": "react-native-scripts android",
+    "ios": "react-native-scripts ios",
+    "test": "node node_modules/jest/bin/jest.js",
+    "lint": "./node_modules/.bin/eslint . --ext .js"
+  },
+  "jest": {
+    "preset": "jest-expo"
+  },
   "dependencies": {
-    "expo": "17.0.0",
-    "prettier": "^1.4.2",
-    "react": "16.0.0-alpha.6",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-17.0.0.tar.gz",
-    "react-native-blur": "^3.0.0-alpha",
-    "react-native-global-props": "^1.1.1",
-    "react-native-keyboard-aware-scroll-view": "^0.2.9",
-    "react-navigation": "^1.0.0-beta.11",
-    "react-native-overlay": "^0.5.0",
-    "react-redux": "^5.0.5",
-    "redux": "^3.6.0",
-    "redux-persist": "^4.8.0"
+    "expo": "^25.0.0",
+    "lato-font": "^3.0.0",
+    "react": "16.2.0",
+    "react-native": "0.52.0",
+    "react-navigation": "^1.1.1",
+    "react-redux": "^5.0.7",
+    "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^5.9.1",
+    "redux-thunk": "^2.2.0"
   }
 }

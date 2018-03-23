@@ -1,9 +1,9 @@
 {
-  "name": "rn-devello",
-  "description": "An empty new project",
-  "slug": "rn-devello",
+  "name": "Reusable Components",
+  "description": "Examples of reusable and customizable components",
+  "slug": "Reusable-Components-Seminar",
   "privacy": "public",
-  "sdkVersion": "17.0.0",
+  "sdkVersion": "25.0.0",
   "version": "1.0.0",
   "orientation": "portrait",
   "primaryColor": "#cccccc",
