@@ -1,20 +1,13 @@
 import { StyleSheet } from 'react-native'
 
 export default styles = StyleSheet.create({
-  inputs: {
-    marginTop: 30,
-    height: 40,
-    borderColor: "white",
-    borderWidth: 1,
-  },
-  view: {
+  background: {
     flex: 1,
-    height: 10,
-    backgroundColor: "white",
+    backgroundColor: 'rgb(243,190,138)',
   },
-  header: {
-    fontSize: 30,
-    textAlign: "center",
-    marginTop: 15
-  }
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 })

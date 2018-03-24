@@ -7,7 +7,7 @@ export default RootNavigator = StackNavigator({
   MainScreen: { 
     screen: MainScreen,
     navigationOptions: {
-      title: "BOARDS"
+      header: null,
     }
   },
 })
