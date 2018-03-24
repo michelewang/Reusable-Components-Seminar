@@ -4,11 +4,12 @@ import PropTypes from 'prop-types'
 import { FormItem } from '../../components'
 import styles from './styles'
 import Initial from './initial'
+import Final from './final'
 
 export default class RandItemForm extends Component {
   render() {
     return (
-      <Initial {...this.props}/>
+      <Final {...this.props}/>
     )
   }
 }

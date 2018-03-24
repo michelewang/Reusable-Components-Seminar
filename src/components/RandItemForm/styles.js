@@ -10,10 +10,10 @@ export default styles = StyleSheet.create({
   	width: '100%',
   	marginVertical: 10,
   	borderRadius: 5,
-  	backgroundColor: 'rgb(252,242,232)',
+  	backgroundColor: 'white',
   },
   title: {
-  	color: 'rgb(74,74,74)',
+  	color: 'rgb(243,190,138)',
   },
   formInputContainer: {
   	borderBottomWidth: 0,
@@ -21,6 +21,7 @@ export default styles = StyleSheet.create({
   },
   formInput: {
   	width: '100%',
+    color: 'rgb(124,183,170)',
   },
   submit: {
   	marginTop: 20,

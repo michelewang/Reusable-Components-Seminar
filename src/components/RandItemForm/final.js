@@ -8,6 +8,10 @@ export default class Final extends Component {
   state = {
   }
 
+  handleChange = (key, newText) => {
+    this.setState({[key]: newText})
+  }
+
   submit = () => console.log(JSON.stringify(this.state))
 
   render() {
@@ -16,18 +20,36 @@ export default class Final extends Component {
         <FormItem
           title={'Name'}
           placeholder={'John'}
+          onChangeText={this.handleChange.bind(null,'name')}
+          containerStyle={styles.inputContainer}
+          titleStyle={styles.title}
+          inputStyle={styles.formInput}
         />
         <FormItem
           title={'Email'}
           placeholder={'john@email.com'}
+          onChangeText={this.handleChange.bind(null,'email')}
+          containerStyle={styles.inputContainer}
+          titleStyle={styles.title}
+          inputStyle={styles.formInput}
         />
         <FormItem
           title={'Password'}
           placeholder={'password'}
+          onChangeText={this.handleChange.bind(null,'password')}
+          containerStyle={styles.inputContainer}
+          titleStyle={styles.title}
+          inputStyle={styles.formInput}
+          secureTextEntry
         />
         <FormItem
           title={'Confirm Password'}
           placeholder={'confirm'}
+          onChangeText={this.handleChange.bind(null,'confirm')}
+          containerStyle={styles.inputContainer}
+          titleStyle={styles.title}
+          inputStyle={styles.formInput}
+          secureTextEntry
         />
         <TouchableOpacity onPress={this.submit}style={styles.submit}>
           <Text style={styles.submitText}>Submit</Text>
