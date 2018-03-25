@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { FormItem } from '../../components'
 import styles from './styles'
 import Initial from './initial'
+import Final from './final'
 
 export default class FinalForm extends Component {
   render() {
@@ -40,7 +41,7 @@ export default class FinalForm extends Component {
       },
   	}
     return (
-      <Initial {...this.props} items={items}/>
+      <Final {...this.props} items={items}/>
     )
   }
 }
