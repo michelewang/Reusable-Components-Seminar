@@ -1,8 +1,3 @@
-export {default as Button} from './Button'
-export {default as Board} from './Board'
-export {default as Card} from './Card'
-export {default as List} from './List'
-export {default as AddModal} from './AddModal'
 export {default as BaseForm} from './BaseForm'
 export {default as FormItem} from './FormItem'
 export {default as RandItemForm} from './RandItemForm'
