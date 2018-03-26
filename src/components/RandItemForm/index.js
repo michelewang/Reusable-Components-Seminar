@@ -9,7 +9,7 @@ import Final from './final'
 export default class RandItemForm extends Component {
   render() {
     return (
-      <Final {...this.props}/>
+      <Initial {...this.props}/>
     )
   }
 }

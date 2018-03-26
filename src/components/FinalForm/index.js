@@ -41,7 +41,7 @@ export default class FinalForm extends Component {
       },
   	}
     return (
-      <Final {...this.props} items={items}/>
+      <Initial {...this.props} items={items}/>
     )
   }
 }

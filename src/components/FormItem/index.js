@@ -9,7 +9,7 @@ import Final from './final'
 export default class FormItem extends Component {
   render() {
     return (
-      <Final {...this.props}/>
+      <Initial {...this.props}/>
     )
   }
 }
