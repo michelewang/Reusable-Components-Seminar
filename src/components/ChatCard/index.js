@@ -7,36 +7,42 @@ import icon from "../../../assets/icons/app.png";
 
 export default class ChatCard extends Component {
   static defaultProps = {
-    title: "",
+    name: "",
     description: "",
     image: icon
   };
 
   static propTypes = {
-    title: PropTypes.string,
+    name: PropTypes.string,
     description: PropTypes.string,
     image: Image.propTypes.source,
-    containerStyle: View.propTypes.style,
-    titleStyle: Text.propTypes.style,
-    inputStyle: Text.propTypes.style // WARNING: There is no TextInput.propTypes.style
+    backgroundContainerStyle: View.propTypes.style,
+    imageStyle: Image.propTypes.style,
+    nameTextStyle: Text.propTypes.style,
+    descTextStyle: Text.propTypes.style // WARNING: There is no TextInput.propTypes.style
   };
 
   render() {
     const {
-      title,
+      name,
       description,
       image,
-      containerStyle,
-      titleStyle,
-      labelStyle
+      backgroundContainerStyle,
+      imageStyle,
+      nameTextStyle,
+      descTextStyle
     } = this.props;
     return (
-      <View style={[styles.backgroundContainer, containerStyle]}>
-        <Image source={icon} style={styles.icon} />
+      <View style={[styles.backgroundContainer, backgroundContainerStyle]}>
+        <Image source={icon} style={[styles.icon, imageStyle]} />
         <View style={styles.textContainer}>
-          <Text style={styles.nameText}>FirstName LastName</Text>
-          <Text ellipsizeMode="tail" numberOfLines={2} style={styles.descText}>
-            DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription
+          <Text style={[styles.nameText, nameTextStyle]}>{name}</Text>
+          <Text
+            ellipsizeMode="tail"
+            numberOfLines={2}
+            style={[styles.descText, descTextStyle]}
+          >
+            {description}
           </Text>
         </View>
       </View>
