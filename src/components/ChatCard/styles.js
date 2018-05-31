@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import styled from "styled-components";
 
 export default (styles = StyleSheet.create({
   backgroundContainer: {
